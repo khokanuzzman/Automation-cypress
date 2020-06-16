@@ -38,16 +38,25 @@ context('Actions', () => {
   // });
 
   it('select dashboard', () => {
-    cy.get('div.form-group input[name="username"]').first().type('1010')
+    cy.viewport(1440, 1200)
+    cy.get('div.form-group input[name="username"]').first().type('1010').focus().blur({ force: true })
+    cy.wait(3000)
     cy.get('input.form-control.ng-untouched.ng-pristine.ng-invalid').first().type('ek911')
     cy.get('button.btn.btn-jotno.btn-block.text-uppercase').first().click()
     cy.get('.table tbody tr td').first().contains('Select').click()
-    cy.wait(5000)
+    cy.wait(3000)
+    cy.get('small.text-white').contains('Total Prescriptions').should('be.visible')
+    cy.wait(3000)
     cy.get('a#navbarDropdown.nav-link.dropdown-toggle').contains('Organization').click().wait(2000).get('.dropdown-item').contains('Labaid Cardiac Hospital').click()
-    cy.wait(5000)
+    cy.wait(3000)
+    cy.get('small.text-white').contains('Total Prescriptions').should('be.visible')
+    cy.wait(3000)
     cy.get('a#navbarDropdown.nav-link.dropdown-toggle').contains('Organization').click().wait(2000).get('.dropdown-item').contains('Dhaka Medical College and Hospital').click()
-    cy.wait(5000)
+    cy.wait(3000)
+    cy.get('small.text-white').contains('Total Prescriptions').should('be.visible')
+    cy.wait(3000)
     cy.get('a#navbarDropdown.nav-link.dropdown-toggle').contains('Organization').click().wait(2000).get('.dropdown-item').contains('Mirpur Diagnostic Center').click()
+    cy.get('small.text-white').contains('Total Prescriptions').should('be.visible').should('have.text','Total Prescriptions')
 
   });
 
