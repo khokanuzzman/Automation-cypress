@@ -1,5 +1,7 @@
 /// <reference types="cypress" />
 
+const todaysDate = Cypress.moment().format('MMM DD, YYYY')
+
 context('Actions', () => {
   beforeEach(() => {
     cy.visit('http://localhost:4200/')
@@ -8,31 +10,45 @@ context('Actions', () => {
   // https://on.cypress.io/interacting-with-elements
 
 
-  it('login', () => {
-    // cy.get('.btn-group-toggle > label.btn.btn-outline-secondary.active:nth-child(1)').click()
+  // it('login', () => {
+  //   // cy.get('.btn-group-toggle > label.btn.btn-outline-secondary.active:nth-child(1)').click()
+  //   cy.get('div.form-group input[name="username"]').first().type('1010')
+  //   cy.get('input.form-control.ng-untouched.ng-pristine.ng-invalid').first().type('ek911')
+  //   cy.get('button.btn.btn-jotno.btn-block.text-uppercase').first().click()
+  //   cy.contains('Welcome Dr. Hasan Shahriar').should('be.visible')
+  //   cy.wait(5000)
+
+  // });
+
+  // it('incorrect bmdc or something when login', () => {
+  //   cy.get('div.form-group input[name="username"]').first().type('1010')
+  //   cy.get('input.form-control.ng-untouched.ng-pristine.ng-invalid').first().type('ek91')
+  //   cy.get('button.btn.btn-jotno.btn-block.text-uppercase').first().click()
+  //   cy.get('.ng-dirty.ng-valid.ng-touched:nth-child(1) > span.form-text.text-danger.text-center:nth-child(3)').contains('Incorrect BMDC number or password')
+  //   cy.wait(5000)
+  // });
+
+  // it('login dental', () => {
+  //   cy.get('label.btn.btn-outline-secondary').last().click()
+  //   cy.get('div.form-group input[name="username"]').first().type('1020')
+  //   cy.get('input.form-control.ng-untouched.ng-pristine.ng-invalid').first().type('1122')
+  //   cy.get('button.btn.btn-jotno.btn-block.text-uppercase').first().click()
+  //   cy.contains('Welcome Dr. MONIMUL HOQUE').should('be.visible')
+  //   cy.wait(5000)
+  // });
+
+  it('select dashboard', () => {
     cy.get('div.form-group input[name="username"]').first().type('1010')
     cy.get('input.form-control.ng-untouched.ng-pristine.ng-invalid').first().type('ek911')
     cy.get('button.btn.btn-jotno.btn-block.text-uppercase').first().click()
-    cy.contains('Welcome Dr. Hasan Shahriar').should('be.visible')
+    cy.get('.table tbody tr td').first().contains('Select').click()
     cy.wait(5000)
-
-  });
-
-  it('incorrect bmdc', () => {
-    cy.get('div.form-group input[name="username"]').first().type('1010')
-    cy.get('input.form-control.ng-untouched.ng-pristine.ng-invalid').first().type('ek91')
-    cy.get('button.btn.btn-jotno.btn-block.text-uppercase').first().click()
-    cy.get('.ng-dirty.ng-valid.ng-touched:nth-child(1) > span.form-text.text-danger.text-center:nth-child(3)').contains('Incorrect BMDC number or password')
+    cy.get('a#navbarDropdown.nav-link.dropdown-toggle').contains('Organization').click().wait(2000).get('.dropdown-item').contains('Labaid Cardiac Hospital').click()
     cy.wait(5000)
-  });
-
-  it('login dental', () => {
-    cy.get('label.btn.btn-outline-secondary').last().click()
-    cy.get('div.form-group input[name="username"]').first().type('1020')
-    cy.get('input.form-control.ng-untouched.ng-pristine.ng-invalid').first().type('1122')
-    cy.get('button.btn.btn-jotno.btn-block.text-uppercase').first().click()
-    cy.contains('Welcome Dr. MONIMUL HOQUE').should('be.visible')
+    cy.get('a#navbarDropdown.nav-link.dropdown-toggle').contains('Organization').click().wait(2000).get('.dropdown-item').contains('Dhaka Medical College and Hospital').click()
     cy.wait(5000)
+    cy.get('a#navbarDropdown.nav-link.dropdown-toggle').contains('Organization').click().wait(2000).get('.dropdown-item').contains('Mirpur Diagnostic Center').click()
+
   });
 
 
